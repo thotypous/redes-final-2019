@@ -154,4 +154,4 @@ HOST: alarm                       Loss%   Snt   Last   Avg  Best  Wrst StDev
   2.|-- 192.168.125.1              0.0%    10   34.3  34.4  34.0  34.7   0.2
 ```
 
-Note o endereço IP do roteador em Python (`192.168.122.1`) aparecendo como segundo salto da rota.
+Note o endereço IP do roteador em Python (`192.168.122.1`) aparecendo como primeiro salto da rota.
