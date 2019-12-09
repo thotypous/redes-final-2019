@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import asyncio
 from camadafisica import ZyboSerialDriver
-from myip import CamadaRede  # copie o arquivo da Etapa 3
-from myslip import CamadaEnlace
+from myip import CamadaRede      # copie o arquivo da Etapa 3
+from myslip import CamadaEnlace  # copie o arquivo da Etapa 4
 
 
 driver = ZyboSerialDriver()

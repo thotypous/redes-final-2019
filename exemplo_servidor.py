@@ -4,9 +4,9 @@
 
 import asyncio
 from camadafisica import ZyboSerialDriver
-from mytcp import Servidor   # copie o arquivo da Etapa 2
-from myip import CamadaRede  # copie o arquivo da Etapa 3
-from myslip import CamadaEnlace
+from mytcp import Servidor       # copie o arquivo da Etapa 2
+from myip import CamadaRede      # copie o arquivo da Etapa 3
+from myslip import CamadaEnlace  # copie o arquivo da Etapa 4
 
 # Implemenetação da camada de aplicação
 
