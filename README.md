@@ -12,7 +12,7 @@ A placa pode ser alimentada pela USB. Ela deve ter vindo com um cartão MicroSD 
    ```
    Se não aparecer nada na tela, aperte ENTER.
 
-   Para encerrar a sessão, pressione as teclas **Ctrl A** e, depos de soltá-las, pressione a tecla **K**.
+   Para encerrar a sessão, pressione as teclas **Ctrl A** e, depos de soltá-las, pressione a tecla **K** e, por fim, **Y**.
 
    Se você estiver usando Windows, use o HyperTerminal ou algum programa similar. Apenas note que a placa expõe duas portas seriais pela USB, e você deve acessar a segunda dentre elas. Confira se a velocidade está configurada para 115200 bits por segundo.
 
