@@ -137,7 +137,7 @@ Se tudo estiver funcionando (e sem mau contato), você conseguirá pingar os out
 
 * `ping 192.168.125.1`
 
-Se a sua implementação de camada de rede estiver passando em todos os testes, ou seja, se você tiver implementado o *ICMP Time exceeded*, você deve ser capaz de utilizar, também o utilitário `mtr` para traçar sua rota até esses endereços:
+Se a sua implementação de camada de rede estiver passando em todos os testes, ou seja, se você tiver implementado o *ICMP Time exceeded*, você deve ser capaz de utilizar, também, o utilitário `mtr` para traçar sua rota até esses endereços:
 
 ```
 $ mtr 192.168.124.1
