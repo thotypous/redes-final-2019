@@ -204,6 +204,7 @@ try:
 except:
     import traceback
     traceback.print_exc()
+self.buf = b''
 ```
 
 Essa situação poderia ter sido aferida pelos testes automatizados, mas realmente escapou! Desculpe se vocês tiverem que corrigi-la somente agora.
