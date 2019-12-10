@@ -175,7 +175,7 @@ Como agora estamos usando SLIP e o Linux sabe que o hardware da porta serial nã
             return
 ```
 
-Logo após a verificação da porta de destino, que já existia no código:
+logo após a verificação da porta de destino, que já existia no código:
 
 ```python
         if dst_port != self.porta:
