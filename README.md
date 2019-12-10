@@ -155,3 +155,55 @@ HOST: alarm                       Loss%   Snt   Last   Avg  Best  Wrst StDev
 ```
 
 Note o endereço IP do roteador em Python (`192.168.122.1`) aparecendo como primeiro salto da rota.
+
+
+# Resolução de problemas
+
+## Minha implementação de TCP está recebendo dados corrompidos
+
+Muito provavelmente a sua implementação de TCP não deve estar verificando o *checksum* dos segmentos recebidos, pois essa verificação não era exercitada pelos testes automatizados.
+
+O motivo para não termos exercitado essa verificação até agora é que, devido a muitas placas de rede hoje terem aceleração via hardware para o cálculo do *checksum*, o padrão do Linux é deixar esse *checksum* zerado. Por causa disso, testes que fizéssemos com *raw sockets* falhariam quando recebêssemos os segmentos montados pelo Linux.
+
+Como agora estamos usando SLIP e o Linux sabe que o hardware da porta serial não dispõe de nenhuma aceleração desse tipo, não existe mais esse problema. Para tornar sua implementação de TCP capaz de detectar erros de *checksum*, acrescente as seguintes linhas:
+
+```python
+        pseudohdr = str2addr(src_addr) + str2addr(dst_addr) + \
+            struct.pack('!HH', 0x0006, len(segment))
+        if calc_checksum(pseudohdr + segment) != 0:
+            print('descartando segmento com checksum incorreto')
+            return
+```
+
+Logo após a verificação da porta de destino, que já existia no código:
+
+```python
+        if dst_port != self.porta:
+            # Ignora segmentos que não são destinados à porta do nosso servidor
+            return
+```
+
+## Após ocorrer alguma exceção, os protocolos começam a se comportar de forma estranha
+
+Quando utilizamos `asyncio` e ocorre uma exceção no nosso código Python em meio ao tratamento de um evento, o processo não é encerrado. O tratamento do evento atual é interrompido no ponto em que ocorreu a exceção e, em seguida, o processo fica aguardando ocorrer o próximo evento (por exemplo, recebimento de mais dados).
+
+Se, para manter a consistência, o seu código necessitar fazer alguma alteração de estado após chamar código externo (*callback*), tome cuidado com isso.
+
+Por exemplo, na minha implementação de SLIP eu tinha um trecho de código assim:
+
+```python
+self.callback(self.buf)
+self.buf = b''
+```
+
+O problema disso é que se ocorrer uma exceção na chamada `self.callback`, a linha de baixo, que torna o `self.buf` vazio, nunca vai executar. Para resolver esse problema, use nosso velho amigo, o bloco `try`/`except`. Sugiro que você **nunca** na sua vida deixe um bloco `except` vazio. Se quiser ignorar a exceção, é útil mesmo assim mostrá-la na tela, para facilitar a depuração do código. No exemplo acima, ficaria:
+
+```python
+try:
+    self.callback(self.buf)
+except:
+    import traceback
+    traceback.print_exc()
+```
+
+Essa situação poderia ter sido aferida pelos testes automatizados, mas realmente escapou! Desculpe se vocês tiverem que corrigi-la somente agora.
