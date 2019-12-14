@@ -7,7 +7,11 @@ Este documento é um guia de como utilizar a placa Zybo Z7-20 para colocar o seu
 
 A placa pode ser alimentada pela USB. Ela deve ter vindo com um cartão MicroSD com o Arch Linux instalado. Caso você precise gerar seu próprio cartão SD, baixe os arquivos para serem gravados com o [sdcard_download.sh](sdcard_download.sh) e, em seguida, formate o cartão com o [sdcard_format.sh](sdcard_format.sh).
 
-Para acessar esse sistema, há duas opções:
+Assegure-se que a placa esteja configurada para bootar do SD:
+
+![](fig/zybo_z7_sdcard.jpg)
+
+Para acessar o sistema da placa, há duas opções:
 
  * Pela própria USB. Se você tiver ligado a placa a um computador, execute:
    ```bash
