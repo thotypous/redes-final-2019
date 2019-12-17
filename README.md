@@ -15,7 +15,7 @@ Para acessar o sistema da placa, há duas opções:
 
  * Pela própria USB. Se você tiver ligado a placa a um computador, execute:
    ```bash
-   screen /dev/ttyUSB1 115200,cs8,-parenb,-cstopb
+   sudo screen /dev/ttyUSB1 115200,cs8,-parenb,-cstopb
    ```
    Se não aparecer nada na tela, aperte ENTER.
 
